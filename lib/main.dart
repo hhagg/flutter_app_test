@@ -13,23 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.grey,
       ),
       home: BasicsPage(),
     );
@@ -43,6 +27,83 @@ class BasicsPage extends StatelessWidget {
     var platform = Theme.of(context).platform;
     print("size : $size");
     print("platform : $platform");
-    return Container(height: 10, width: 10);
+    return Scaffold(
+      appBar: AppBar(
+        leading: Icon(Icons.code),
+        title: Text("Developer Forever"),
+        backgroundColor: Color.fromARGB(255, 241, 5, 230),
+        actions: [
+            Icon(Icons.person),
+            Icon(Icons.menu),
+          ],
+          centerTitle: true,
+        ),
+      body: Container(
+          height: size.height,
+          width: size.width,
+          color: Color.fromRGBO(129, 127, 129, 1),
+          //margin: EdgeInsets.all(10),
+          //padding: EdgeInsets.only(top: 150),
+          child: Center(
+            child : Card(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.min,
+                  children: [
+                    fromAsset(),
+                  ],
+                ),
+              ),
+                elevation: 15,
+            ),
+          )
+        ),
+    );
+  }
+
+  Text simpleText(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+          color: Colors.white,
+          fontSize: 40,
+          fontWeight: FontWeight.w200,
+          fontStyle: FontStyle.italic),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Image fromNetwork(Size size) {
+    return Image.network(
+              "https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            );
+  }
+
+  Image fromAsset() {
+    return Image.asset(
+              "images/imageDemo.jpg",
+            );
+  }
+
+  Text textRichDemo() {
+    return Text.rich(
+      TextSpan(
+          text: "S",
+          style: TextStyle(fontSize: 20, color: Colors.white),
+          children: [
+            TextSpan(
+              text: "aa",
+              style: TextStyle(fontSize: 25, color: Colors.blue),
+            ),
+            TextSpan(
+              text: "X",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            )
+          ]),
+    );
   }
 }
